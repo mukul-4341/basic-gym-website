@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fitness Calculator</title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  <style>
+     body {
+        font-family: 'Baloo Bhai', cursive;
+        color: rgb(240, 232, 232);
+        margin: 10px;
+        padding: 10px;
+        background:url('img/gym1.jpg') no-repeat center fixed;
+        background-size: cover;
+
+    }
+    .left {
+        display: inline-block;
+        /* border: 2px solid red; */
+        position: absolute;
+        left: 60px;
+        top: 20px;
+    }
+
+    .left img {
+        width: 130px;
+        
+    }
+
+    .left div {
+        line-height: 1px;
+        font-size: 20px;
+        text-align: center;
+    }
+    h1 {
+      text-align: center;
+    }
+    #bmi-form {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-top: 10px;
+    }
+    #bmi-result {
+      margin-top: 50px;
+      text-align: center;
+    }
+    .mid {
+        display: block;
+        width: 65%;
+        margin: 29px auto;
+        /* border: 2px solid green; */
+    }
+
+    .right {
+        position: absolute;
+        right: 60px;
+        top: 56px;
+        display: inline-block;
+        /* border: 2px solid yellow; */
+    }
+
+    .navbar {
+        display: inline-block;
+    }
+
+    .navbar li {
+        display: inline-block;
+        font-size: 25px;
+    }
+
+    .navbar li a {
+        color: white;
+        text-decoration: none;
+        padding: 34px 23px;
+
+    }
+
+    .navbar li a:hover,
+    .navbar li a.active {
+        text-decoration: underline;
+        color: grey;
+
+    }
+
+    .btn {
+        font-family: 'Baloo Bhai', cursive;
+        margin: 0px 9px;
+        background-color: black;
+        color: white;
+        padding: 4px 14px;
+        border: 2px solid grey;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: rgb(31, 30, 30);
+    }
+
+    .container {
+        border: 2px solid white;
+        margin: 106px 80px;
+        padding: 75px;
+        width: 33%;
+        border-radius: 28px;
+    }
+    .marquee {
+      font-family: 'Baloo Bhai', cursive;
+      font-size: 24px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      animation: marquee 10s linear infinite;
+    }
+    
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+
+  </header>
+  <div class="mid">
+    <ul class="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about us.html">About us</a></li>
+        <li><a href="Fitness.html">Fitness Calculator</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+</div>
+<div class="left">
+  <img src="img/gym.png" alt="">
+  <div>CROSSFIT GYM</div>
+</div>
+  <h1>BMI CALCULATOR</h1>
+  <form id="bmi-form">
+    <label for="weight">Weight (kg):</label>
+    <input type="text" id="weight" placeholder="Enter your weight">
+    <label for="height">Height (cm):</label>
+    <input type="text" id="height" placeholder="Enter your height">
+    <input type="submit" value="Calculate BMI">
+  </form>
+  <div id="bmi-result"></div>
+  <div class="marquee">No pain, no gain</div>
+  </div>
+
+  <script>
+    document.getElementById("bmi-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      calculateBMI();
+    });
+
+    function calculateBMI() {
+      var weight = parseFloat(document.getElementById("weight").value);
+      var height = parseFloat(document.getElementById("height").value);
+
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        document.getElementById("bmi-result").innerHTML = "Please enter valid values for weight and height.";
+        return;
+      }
+
+      var bmi = weight / ((height / 100) * (height / 100));
+      var category = "";
+
+      if (bmi < 18.5) {
+        category = "Underweight";
+      } else if (bmi >= 18.5 && bmi < 25) {
+        category = "Normal weight";
+      } else if (bmi >= 25 && bmi < 30) {
+        category = "Overweight";
+      } else {
+        category = "Obese";
+      }
+
+      var result = "Your BMI is " + bmi.toFixed(2) + " (" + category + ").";
+      document.getElementById("bmi-result").innerHTML = result;
+    }
+    
+  </script>
+</body>
+<footer>
+  <p>&copy; 2023 Fitness Gym. All rights reserved. | CrossFit GYM</p>
+</footer>
+</html>
